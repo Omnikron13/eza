@@ -382,6 +382,7 @@ dependencies = [
  "log",
  "natord",
  "nu-ansi-term",
+ "num_cpus",
  "number_prefix",
  "once_cell",
  "palette",
