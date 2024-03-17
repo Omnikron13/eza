@@ -2,8 +2,10 @@
 
 use std::io::{self, Write};
 
+use ansi_width;
 use nu_ansi_term::AnsiStrings as ANSIStrings;
 use term_grid as grid;
+use grid::{Direction, Filling, Grid, GridOptions};
 
 use crate::fs::feature::git::GitCache;
 use crate::fs::filter::FileFilter;
