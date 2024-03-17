@@ -255,14 +255,28 @@ impl SortField {
                 order            => order,
             },
 
-            Self::Extension(ABCabc) => match a.ext.cmp(&b.ext) {
-                Ordering::Equal  => natord::compare(&a.name, &b.name),
-                order            => order,
+            Self::Extension(ABCabc) => {
+                // If either file is a directory, don’t sort by extension as that would be very unorthodox.
+                if a.is_directory() || b.is_directory() {
+                    // TODO: sort dirs in natural order instead..?
+                    return Ordering::Equal;
+                }
+                match a.ext.cmp(&b.ext) {
+                    Ordering::Equal  => natord::compare(&a.name, &b.name),
+                    order            => order,
+                }
             },
 
-            Self::Extension(AaBbCc) => match a.ext.cmp(&b.ext) {
-                Ordering::Equal  => natord::compare_ignore_case(&a.name, &b.name),
-                order            => order,
+            Self::Extension(AaBbCc) => {
+                // If either file is a directory, don’t sort by extension as that would be very unorthodox.
+                if a.is_directory() || b.is_directory() {
+                    // TODO: sort dirs in natural order instead..?
+                    return Ordering::Equal;
+                }
+                match a.ext.cmp(&b.ext) {
+                    Ordering::Equal  => natord::compare_ignore_case(&a.name, &b.name),
+                    order            => order,
+                }
             },
 
             Self::NameMixHidden(ABCabc) => natord::compare(
