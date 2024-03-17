@@ -2,6 +2,7 @@ use std::fmt::Debug;
 use std::path::Path;
 
 use nu_ansi_term::{AnsiString as ANSIString, Style};
+use path_clean;
 use unicode_width::UnicodeWidthStr;
 
 use crate::fs::{File, FileTarget};
